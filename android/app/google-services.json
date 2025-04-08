@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "32989748306",
+    "project_id": "admin-kdv",
+    "storage_bucket": "admin-kdv.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:32989748306:android:71b4b8657640c77252538b",
+        "android_client_info": {
+          "package_name": "com.example.admin_kdv"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYabPpocxD4Nf19LLR3dwv2_TFy5vD2PQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
