@@ -38,7 +38,7 @@ class _AddExpansePageState extends State<AddExpansePage> {
   final endDateController = TextEditingController();
   final isButtonLoading = ValueNotifier<bool>(false);
   final isLoading = ValueNotifier<bool>(false);
- final ValueNotifier<List<ExpenseItemModel>> expenseItems = ValueNotifier<List<ExpenseItemModel>>([
+  final ValueNotifier<List<ExpenseItemModel>> expenseItems = ValueNotifier<List<ExpenseItemModel>>([
     ExpenseItemModel(
       nameController: TextEditingController(),
       priceController: TextEditingController(),
@@ -76,10 +76,12 @@ class _AddExpansePageState extends State<AddExpansePage> {
         if (r.expenseItems.isNotEmpty) {
           log("message fdhfj");
 
-          expenseItems.value = items.map((item) => ExpenseItemModel(
-            nameController: TextEditingController(text: item.nameController.text),
-            priceController: TextEditingController(text: item.priceController.text),
-          )).toList();
+          expenseItems.value = items
+              .map((item) => ExpenseItemModel(
+                    nameController: TextEditingController(text: item.nameController.text),
+                    priceController: TextEditingController(text: item.priceController.text),
+                  ))
+              .toList();
         }
 
         isLoading.value = false;
@@ -87,7 +89,6 @@ class _AddExpansePageState extends State<AddExpansePage> {
     );
   }
 
- 
   final ValueNotifier<double> totalExpense = ValueNotifier<double>(0.0);
 
   @override

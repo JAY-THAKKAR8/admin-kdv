@@ -12,7 +12,14 @@ class UserRepository extends IUserRepository {
   UserRepository(super.firestore);
 
   @override
-  FirebaseResult<UserModel> addCustomer({String? name, String? email, String? mobileNumber, String? password}) {
+  FirebaseResult<UserModel> addCustomer(
+      {String? name,
+      String? email,
+      String? mobileNumber,
+      String? villNumber,
+      String? line,
+      String? role,
+      String? password}) {
     return Result<UserModel>().tryCatch(
       run: () async {
         final now = Timestamp.now();
@@ -23,6 +30,9 @@ class UserRepository extends IUserRepository {
           'name': name,
           'email': email,
           'mobile_number': mobileNumber,
+          'villa_number': villNumber,
+          'line_number': line,
+          'role': role,
           'password': password,
           'createdAt': now.toDate(),
           'updatedAt': now.toDate(),
@@ -32,6 +42,9 @@ class UserRepository extends IUserRepository {
           name: name,
           email: email,
           mobileNumber: mobileNumber,
+          villNumber: villNumber,
+          lineNumber: line,
+          role: role,
           password: password,
           createdAt: now.toDate().toString(),
           updatedAt: now.toDate().toString(),
@@ -69,7 +82,6 @@ class UserRepository extends IUserRepository {
         final customerCollection = FirebaseFirestore.instance.users;
         final firebaseAuth = FirebaseAuth.instance;
         final currentUser = firebaseAuth.currentUser;
-
         if (currentUser != null && name != null) {
           await currentUser.updateDisplayName(name);
         }

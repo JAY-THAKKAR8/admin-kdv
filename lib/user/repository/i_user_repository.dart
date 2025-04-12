@@ -12,6 +12,9 @@ abstract class IUserRepository {
     String? name,
     String? email,
     String? mobileNumber,
+    String? villNumber,
+    String? line,
+    String? role,
     String? password,
   });
 

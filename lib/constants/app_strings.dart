@@ -14,6 +14,7 @@ class AppStrings {
     'Line head',
     'Line member',
   ];
+
   static List<String> lineList = [
     'First line',
     'Second line',

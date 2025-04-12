@@ -14,15 +14,11 @@ import 'package:admin_kdv/injector/injector.dart';
 import 'package:admin_kdv/master/widget/app_asset_image.dart';
 import 'package:admin_kdv/master/widget/app_text_form_field.dart';
 import 'package:admin_kdv/master/widget/custome_button_gradiant_widget.dart';
-import 'package:admin_kdv/user/model/user_model.dart';
-import 'package:admin_kdv/user/repository/i_user_repository.dart';
 import 'package:admin_kdv/utility/pagination_mixin.dart';
 import 'package:admin_kdv/utility/utility.dart';
 import 'package:admin_kdv/widget/common_dailog.dart';
 import 'package:admin_kdv/widget/container_widget.dart';
-import 'package:admin_kdv/widget/custom_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -69,11 +65,11 @@ class _ExpansePageState extends State<ExpansePage> with PaginatisonMixin {
     failOrSucess.fold(
       (l) {
         isLoading.value = false;
-        log(l.jsify().toString() + "expencse");
+        log("${l.jsify()}expencse");
       },
       (r) {
         expanses.value = [...expanses.value, ...r];
-        log(expanses.value.length.toString() + "total expanses");
+        log("${expanses.value.length}total expanses");
         isLoading.value = false;
       },
     );
@@ -141,7 +137,7 @@ class _ExpansePageState extends State<ExpansePage> with PaginatisonMixin {
                     context.goNamed(AppRoutes.addExpanses.name);
                   },
                   height: 38,
-                  width: 113,
+                  width: 120,
                   isGradient: true,
                   child: Text(
                     '+ Add Expanses',
@@ -188,7 +184,7 @@ class _ExpansePageState extends State<ExpansePage> with PaginatisonMixin {
                                       return CustomDataTable(
                                         scrollController: scrollPaginationController,
                                         isPageLoading: loadingMore,
-                                        columns:const [
+                                        columns: const [
                                           DataColumn(
                                             label: DataTableTitleWidget(
                                               title: 'No.',
@@ -199,29 +195,27 @@ class _ExpansePageState extends State<ExpansePage> with PaginatisonMixin {
                                             label: DataTableTitleWidget(
                                               title: 'Expense Name',
                                               isTitle: true,
-                                              ),
+                                            ),
                                           ),
                                           DataColumn(
                                             label: DataTableTitleWidget(
                                               title: 'Start Date',
                                               isTitle: true,
-                                              ),
+                                            ),
                                           ),
                                           DataColumn(
                                             label: DataTableTitleWidget(
                                               title: 'End Date',
                                               isTitle: true,
-                                              
                                             ),
                                           ),
-                                           DataColumn(
+                                          DataColumn(
                                             label: DataTableTitleWidget(
                                               title: 'Total Expanse',
                                               isTitle: true,
                                             ),
                                           ),
-
-                                           DataColumn(
+                                          DataColumn(
                                             label: DataTableTitleWidget(
                                               title: 'Action',
                                               isTitle: true,
@@ -245,7 +239,6 @@ class _ExpansePageState extends State<ExpansePage> with PaginatisonMixin {
                                                 DataCell(
                                                   DataTableTitleWidget(
                                                     title: expanse.expenseName ?? '',
-                                                    
                                                   ),
                                                 ),
                                                 DataCell(
@@ -263,7 +256,6 @@ class _ExpansePageState extends State<ExpansePage> with PaginatisonMixin {
                                                     title: expanse.totalExpense ?? '',
                                                   ),
                                                 ),
-
                                                 DataCell(
                                                   Row(
                                                     children: [
@@ -291,9 +283,9 @@ class _ExpansePageState extends State<ExpansePage> with PaginatisonMixin {
                                                               title:
                                                                   'Are you sure you want to delete ${expanse.expenseName ?? ''}?',
                                                               onTap: () {
-                                                                deleteUser(
-                                                                  userId: expanse.id.toString(),
-                                                                  userName: expanse.expenseName ?? '',
+                                                                deleteExpanse(
+                                                                  expanseId: expanse.id.toString(),
+                                                                  expanseName: expanse.expenseName ?? '',
                                                                 );
                                                               },
                                                             ),
@@ -303,7 +295,6 @@ class _ExpansePageState extends State<ExpansePage> with PaginatisonMixin {
                                                           AppAssets.deleteIcon,
                                                         ),
                                                       ),
-                                                      
                                                     ],
                                                   ),
                                                 ),
@@ -332,31 +323,14 @@ class _ExpansePageState extends State<ExpansePage> with PaginatisonMixin {
     );
   }
 
-  Future<void> editUser({required String userId, required String? isVillaOpen}) async {
-    final response = await getIt<IUserRepository>().updateCustomer(
-      userId: userId,
-      isVillaOpen: isVillaOpen,
-    );
-    await response.fold(
-      (l) {
-        Utility.toast(message: l.message);
-      },
-      (r) async {
-        Utility.toast(message: 'User updated successfully');
-        context.read<RefreshCubit>().modifyUser(r, UserAction.edit);
-        context.pop();
-      },
-    );
-  }
-
-  Future<void> deleteUser({required String userId, required String userName}) async {
-    final result = await getIt<IUserRepository>().deleteCustomer(userId: userId);
+  Future<void> deleteExpanse({required String expanseId, required String expanseName}) async {
+    final result = await getIt<IExpenseRepository>().deleteExpense(expenseId: expanseId);
     await result.fold(
       (l) {
         Utility.toast(message: l.message);
       },
       (r) async {
-        expanses.value = expanses.value.where((e) => e.id != userId).toList();
+        expanses.value = expanses.value.where((e) => e.id != expanseId).toList();
 
         context.pop();
       },

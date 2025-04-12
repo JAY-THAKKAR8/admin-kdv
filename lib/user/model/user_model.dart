@@ -111,6 +111,7 @@ class UserModel extends Equatable {
 
   @override
   bool get stringify => true;
+
   String get userLineViewString {
     switch (lineNumber) {
       case AppConstants.firstLine:
@@ -120,7 +121,7 @@ class UserModel extends Equatable {
       case AppConstants.thirdLine:
         return 'Third line';
       case AppConstants.fourthLine:
-        return 'Fouth line';
+        return 'Fourth line';
       case AppConstants.fifthLine:
         return 'Fifth line';
       default:
