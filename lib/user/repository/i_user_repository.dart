@@ -35,4 +35,6 @@ abstract class IUserRepository {
   FirebaseResult<void> deleteCustomer({
     required String userId,
   });
+
+  FirebaseResult<UserModel> getCurrentUser();
 }

@@ -7,3 +7,8 @@ enum ExpanseAction {
   add,
   edit,
 }
+
+enum MaintenanceAction {
+  add,
+  edit,
+}

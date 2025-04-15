@@ -87,6 +87,17 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           AppDrawerItemView(
+            title: 'Maintenance',
+            icon: currentIndex == 3 ? AppAssets.selectedUserIcon : AppAssets.unselectedUserIcon,
+            isSelecetd: currentIndex == 3,
+            onTap: () {
+              if (context.isMobile) {
+                Navigator.pop(context);
+              }
+              onChanged.call(3);
+            },
+          ),
+          AppDrawerItemView(
             title: 'Logout',
             icon: AppAssets.unselectedLogoutIcon,
             onTap: () {},

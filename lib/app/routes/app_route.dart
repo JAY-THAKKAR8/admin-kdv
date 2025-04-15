@@ -18,4 +18,7 @@ class AppRoutes {
   static const expanses = _AppRoute(route: '/expanses', name: 'expanses');
   static const addExpanses = _AppRoute(route: '/add-expanses', name: 'add-expanses');
   static const editExpanses = _AppRoute(route: '/edit-expanses', name: 'edit-expanses');
+  static const maintenance = _AppRoute(route: '/maintenance', name: 'maintenance');
+  static const addMaintenance = _AppRoute(route: '/add-maintenance', name: 'add-maintenance');
+  static const editMaintenance = _AppRoute(route: '/edit-maintenance', name: 'edit-maintenance');
 }

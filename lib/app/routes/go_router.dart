@@ -5,6 +5,7 @@ import 'package:admin_kdv/expenses/view/add_expanses_page.dart';
 import 'package:admin_kdv/expenses/view/expenses_page.dart';
 import 'package:admin_kdv/home/view/home_page.dart';
 import 'package:admin_kdv/login/views/login_page.dart';
+import 'package:admin_kdv/maintenance/view/maintenance_page.dart';
 import 'package:admin_kdv/master/master_page.dart';
 import 'package:admin_kdv/splash/splash_page.dart';
 import 'package:admin_kdv/user/view/add_user_page.dart';
@@ -34,6 +35,7 @@ final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorHomeKey = GlobalKey<NavigatorState>(debugLabel: 'home');
 final _shellNavigatorUserKey = GlobalKey<NavigatorState>(debugLabel: 'user');
 final _shellNavigatorExpenseKey = GlobalKey<NavigatorState>(debugLabel: 'expense');
+final _shellNavigatorMaintenanceKey = GlobalKey<NavigatorState>(debugLabel: 'maintenance');
 
 final goRouter = GoRouter(
   debugLogDiagnostics: kDebugMode,
@@ -102,6 +104,16 @@ final goRouter = GoRouter(
                     builder: (c, s) => AddExpansePage(expanseId: s.uri.queryParameters['expenseId']),
                   ),
                 ]),
+          ],
+        ),
+        StatefulShellBranch(
+          navigatorKey: _shellNavigatorMaintenanceKey,
+          routes: [
+            GoRoute(
+              path: AppRoutes.maintenance.route,
+              name: AppRoutes.maintenance.name,
+              builder: (c, s) => const MaintenancePage(),
+            ),
           ],
         ),
       ],

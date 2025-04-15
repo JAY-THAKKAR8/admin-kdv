@@ -1,5 +1,6 @@
 import 'package:admin_kdv/enums/enum_file.dart';
 import 'package:admin_kdv/expenses/model/expense_model.dart';
+import 'package:admin_kdv/maintenance/model/maintenance_model.dart';
 import 'package:admin_kdv/user/model/user_model.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -17,5 +18,9 @@ class RefreshCubit extends Cubit<RefreshState> {
 
   void modifyExpanse(ExpenseModel? expanse, ExpanseAction action) {
     emit(ModifyExpanse(expanse: expanse ?? const ExpenseModel(), action: action));
+  }
+
+  void modifyMaintenance(MaintenanceModel? maintenance, MaintenanceAction action) {
+    emit(ModifyMaintenance(maintenance: maintenance ?? const MaintenanceModel(), action: action));
   }
 }

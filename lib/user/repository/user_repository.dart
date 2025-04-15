@@ -132,4 +132,25 @@ class UserRepository extends IUserRepository {
       },
     );
   }
+
+  @override
+  FirebaseResult<UserModel> getCurrentUser() {
+    return Result<UserModel>().tryCatch(
+      run: () async {
+        final currentUser = FirebaseAuth.instance.currentUser;
+
+        if (currentUser == null) {
+          throw Exception('No user is currently logged in');
+        }
+
+        final userDoc = await FirebaseFirestore.instance.users.doc(currentUser.uid).get();
+
+        if (!userDoc.exists) {
+          throw Exception('User data not found');
+        }
+
+        return UserModel.fromJson(userDoc.data()!);
+      },
+    );
+  }
 }

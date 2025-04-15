@@ -28,3 +28,13 @@ final class ModifyExpanse extends RefreshState {
   @override
   List<Object> get props => [expanse, action];
 }
+
+final class ModifyMaintenance extends RefreshState {
+  const ModifyMaintenance({required this.maintenance, required this.action});
+
+  final MaintenanceModel maintenance;
+  final MaintenanceAction action;
+
+  @override
+  List<Object> get props => [maintenance, action];
+}

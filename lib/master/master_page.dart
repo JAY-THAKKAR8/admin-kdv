@@ -80,6 +80,8 @@ class _MasterPageState extends State<MasterPage> {
         return 'User';
       case 2:
         return 'Expenses';
+      case 3:
+        return 'Maintenance';
       default:
         return '';
     }

@@ -1,4 +1,3 @@
-// dart format width=80
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
@@ -19,6 +18,8 @@ import '../auth/repository/i_auth_repository.dart' as _i118;
 import '../cubit/refresh_cubit.dart' as _i228;
 import '../expenses/repository/expense_repository.dart' as _i173;
 import '../expenses/repository/i_expense_repository.dart' as _i925;
+import '../maintenance/repository/i_maintenance_repository.dart' as _i887;
+import '../maintenance/repository/maintenance_repository.dart' as _i154;
 import '../user/repository/i_user_repository.dart' as _i649;
 import '../user/repository/user_repository.dart' as _i824;
 import 'firebase_injectable_module.dart' as _i574;
@@ -38,21 +39,30 @@ extension GetItInjectableX on _i174.GetIt {
     final firebaseAuthInjectableModule = _$FirebaseAuthInjectableModule();
     final firebaseStorageInjectableModule = _$FirebaseStorageInjectableModule();
     gh.factory<_i228.RefreshCubit>(() => _i228.RefreshCubit());
-    gh.lazySingleton<_i974.FirebaseFirestore>(() => firebaseInjectableModule.firestore);
-    gh.lazySingleton<_i59.FirebaseAuth>(() => firebaseAuthInjectableModule.firestoreAuth);
-    gh.lazySingleton<_i457.FirebaseStorage>(() => firebaseStorageInjectableModule.firestoreStorage);
-    gh.factory<_i649.IUserRepository>(() => _i824.UserRepository(gh<_i974.FirebaseFirestore>()));
+    gh.lazySingleton<_i974.FirebaseFirestore>(
+        () => firebaseInjectableModule.firestore);
+    gh.lazySingleton<_i59.FirebaseAuth>(
+        () => firebaseAuthInjectableModule.firestoreAuth);
+    gh.lazySingleton<_i457.FirebaseStorage>(
+        () => firebaseStorageInjectableModule.firestoreStorage);
+    gh.factory<_i887.IMaintenanceRepository>(
+        () => _i154.MaintenanceRepository(gh<_i974.FirebaseFirestore>()));
+    gh.factory<_i649.IUserRepository>(
+        () => _i824.UserRepository(gh<_i974.FirebaseFirestore>()));
     gh.factory<_i118.IAuthRepository>(() => _i118.AuthRepository(
           gh<_i59.FirebaseAuth>(),
           gh<_i974.FirebaseFirestore>(),
         ));
-    gh.factory<_i925.IExpenseRepository>(() => _i173.ExpenseRepository(gh<_i974.FirebaseFirestore>()));
+    gh.factory<_i925.IExpenseRepository>(
+        () => _i173.ExpenseRepository(gh<_i974.FirebaseFirestore>()));
     return this;
   }
 }
 
 class _$FirebaseInjectableModule extends _i574.FirebaseInjectableModule {}
 
-class _$FirebaseAuthInjectableModule extends _i574.FirebaseAuthInjectableModule {}
+class _$FirebaseAuthInjectableModule
+    extends _i574.FirebaseAuthInjectableModule {}
 
-class _$FirebaseStorageInjectableModule extends _i574.FirebaseStorageInjectableModule {}
+class _$FirebaseStorageInjectableModule
+    extends _i574.FirebaseStorageInjectableModule {}
